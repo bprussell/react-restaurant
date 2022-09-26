@@ -13,11 +13,11 @@ const sizeMap = {
   6: "text-base",
 };
 
-export default function Heading(prop: HeadingProps) {
-  const Tag = `h${prop.level}` as keyof JSX.IntrinsicElements;
+export default function Heading(props: HeadingProps) {
+  const Tag = `h${props.level}` as keyof JSX.IntrinsicElements;
   return (
-    <Tag className={`font-bold ${sizeMap[prop.level]} p-2 text-slate-600`}>
-      <span className="inline-block">{prop.children}</span>
+    <Tag className={`font-bold ${sizeMap[props.level]} p-2 text-slate-600`}>
+      <span className="inline-block">{props.children}</span>
     </Tag>
   );
 }

@@ -1,26 +1,29 @@
-import { foods } from "./food";
+import { Link, Route, Routes } from "react-router-dom";
+import Admin from "./Admin";
 import "./index.css";
+import Menu from "./Menu";
 
 export default function App() {
   return (
     <>
-      <h1 className="text-3xl font-bold">React Restaurant</h1>
-      <div className="flex flex-wrap">
-        {foods.map((food) => {
-          return (
-            <div className="max-w-sm cursor-pointer border-solid border-2 border-indigo-600 rounded-lg p-2 m-2 shadow-md hover:bg-indigo-600 hover:text-white">
-              <h2 className="font-semibold text-lg">{food.name}</h2>
-              <img
-                className="h-52"
-                src={`/images/${food.image}`}
-                alt={food.name}
-              />
-              <p>{food.description}</p>
-              <p>${food.price}</p>
-            </div>
-          );
-        })}
-      </div>
+      <nav className="flex sm:justify-left space-x-4 bg-indigo-100 p-1">
+        <h1 className="text-3xl font-bold">React Restaurant</h1>
+        {[
+          ["Home", "/"],
+          ["Admin", "/admin"],
+        ].map(([title, url]) => (
+          <Link
+            to={url}
+            className="rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900"
+          >
+            {title}
+          </Link>
+        ))}
+      </nav>
+      <Routes>
+        <Route path="/" element={<Menu />} />
+        <Route path="/admin" element={<Admin />} />
+      </Routes>
     </>
   );
 }

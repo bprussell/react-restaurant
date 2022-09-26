@@ -11,8 +11,9 @@ export default function App() {
         {[
           ["Home", "/"],
           ["Admin", "/admin"],
-        ].map(([title, url]) => (
+        ].map(([title, url], index) => (
           <Link
+            key={index}
             to={url}
             className="rounded-lg px-3 py-2 text-slate-700 font-medium hover:bg-slate-100 hover:text-slate-900"
           >

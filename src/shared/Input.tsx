@@ -1,4 +1,5 @@
 import React from "react";
+import Error from "./Error";
 
 type InputProps = {
   id: string;
@@ -30,6 +31,7 @@ export default function Input({
         value={value}
         onChange={onChange}
       />
+      {error && <Error error={error} />}
     </div>
   );
 }

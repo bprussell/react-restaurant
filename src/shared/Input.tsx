@@ -1,9 +1,12 @@
+import React from "react";
+
 type InputProps = {
   id: string;
   label: string;
   type?: "text" | "number" | "email" | "password" | "tel";
   className?: string;
-  value?: string;
+  value?: string | number;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 export default function Input({
   id,
@@ -11,6 +14,7 @@ export default function Input({
   type = "text",
   className = "",
   value = "",
+  onChange,
 }: InputProps) {
   return (
     <div className={className}>
@@ -22,6 +26,7 @@ export default function Input({
         className="border border-gray-600 p-2"
         type={type}
         value={value}
+        onChange={onChange}
       />
     </div>
   );

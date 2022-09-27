@@ -20,10 +20,13 @@ export default function Admin() {
     const { id, value } = event.target;
     setFood((prevFood) => ({ ...prevFood, [id]: value }));
   };
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+  };
   return (
     <>
       <Heading level={2}>Admin</Heading>
-      <form>
+      <form onSubmit={handleSubmit}>
         <Input
           id="name"
           label="Name"

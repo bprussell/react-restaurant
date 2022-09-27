@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { Food, foodTags, NewFood } from "./food";
+import toast from "react-hot-toast";
+import { foodTags, NewFood } from "./food";
+import { addFood } from "./services/foodsApi";
 import Button from "./shared/Button";
 import Checkbox from "./shared/Checkbox";
 import CheckboxList from "./shared/CheckboxList";
@@ -16,13 +18,19 @@ const emptyFood: NewFood = {
 
 export default function Admin() {
   const [food, setFood] = useState(emptyFood);
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = event.target;
     setFood((prevFood) => ({ ...prevFood, [id]: value }));
   };
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    await addFood(food);
+    toast.success("Food added! 🍔");
+    setFood(emptyFood);
   };
+
   return (
     <>
       <Heading level={2}>Admin</Heading>
@@ -54,6 +62,7 @@ export default function Admin() {
           label="Image filename"
           className="my-4"
           onChange={handleInputChange}
+          value={food.image}
         />
         <CheckboxList legend="Tags">
           {foodTags.map((tag) => (

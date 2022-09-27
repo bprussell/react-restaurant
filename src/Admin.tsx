@@ -16,16 +16,48 @@ const emptyFood: NewFood = {
   tags: [],
 };
 
+export type Errors = {
+  name?: string;
+  image?: string;
+  price?: string;
+  description?: string;
+  tags?: string;
+};
+
 export default function Admin() {
   const [food, setFood] = useState(emptyFood);
+  const [errors, setErrors] = useState<Errors>({});
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = event.target;
     setFood((prevFood) => ({ ...prevFood, [id]: value }));
   };
 
+  const validate = () => {
+    const newErrors: Errors = {};
+    if (!food.name) {
+      newErrors.name = "Name is required";
+    }
+    if (!food.image) {
+      newErrors.image = "Image is required";
+    }
+    if (!food.price) {
+      newErrors.price = "Price is required";
+    }
+    if (!food.description) {
+      newErrors.description = "Description is required";
+    }
+    if (food.tags.length === 0) {
+      newErrors.tags = "At least one tag is required";
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const isValid = validate();
+    if (!isValid) return;
     await addFood(food);
     toast.success("Food added! 🍔");
     setFood(emptyFood);

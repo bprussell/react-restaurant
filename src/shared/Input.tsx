@@ -6,6 +6,7 @@ type InputProps = {
   type?: "text" | "number" | "email" | "password" | "tel";
   className?: string;
   value?: string | number;
+  error?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 export default function Input({
@@ -15,6 +16,7 @@ export default function Input({
   className = "",
   value = "",
   onChange,
+  error,
 }: InputProps) {
   return (
     <div className={className}>

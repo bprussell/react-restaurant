@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "start-api": "json-server --watch db.json --port 3001"
+    "start-api": "json-server --watch db.json --port 3001",
+    "start": "run-p dev start-api"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.11",

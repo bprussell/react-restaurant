@@ -9,11 +9,18 @@ type CheckboxOption = {
 type CheckboxListProps = {
   className?: string;
   children: React.ReactNode;
+  legend: string;
 };
 
 export default function CheckboxList({
   children,
   className = "",
+  legend,
 }: CheckboxListProps) {
-  return <div className={className}>{children}</div>;
+  return (
+    <fieldset className={className}>
+      <legend>{legend}</legend>
+      {children}
+    </fieldset>
+  );
 }

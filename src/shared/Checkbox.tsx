@@ -7,15 +7,15 @@ type CheckboxProps = {
 export default function Checkbox({
   id = "",
   label = "",
-  checked = true,
+  checked = false,
   value = "",
 }: CheckboxProps) {
   return (
-    <>
+    <div>
       <input id={id} type="checkbox" checked={checked} value={value} />
-      <label className="block" htmlFor={id}>
+      <label className="ml-1" htmlFor={id}>
         {label}
       </label>
-    </>
+    </div>
   );
 }

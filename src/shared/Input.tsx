@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import React from "react";
 import Error from "./Error";
 
@@ -26,7 +27,10 @@ export default function Input({
       </label>
       <input
         id={id}
-        className="border border-gray-600 p-2"
+        className={clsx(
+          "border p-2",
+          error ? "bg-red-50 border-red-600" : "border-gray-600"
+        )}
         type={type}
         value={value}
         onChange={onChange}

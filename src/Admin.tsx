@@ -73,6 +73,7 @@ export default function Admin() {
           className="my-4"
           onChange={handleInputChange}
           value={food.name}
+          error={errors.name}
         />
         <Input
           id="description"
@@ -80,6 +81,7 @@ export default function Admin() {
           className="my-4"
           onChange={handleInputChange}
           value={food.description}
+          error={errors.description}
         />
         <Input
           id="price"
@@ -88,6 +90,7 @@ export default function Admin() {
           type="number"
           onChange={handleInputChange}
           value={food.price}
+          error={errors.price}
         />
         <Input
           id="image"
@@ -95,8 +98,9 @@ export default function Admin() {
           className="my-4"
           onChange={handleInputChange}
           value={food.image}
+          error={errors.image}
         />
-        <CheckboxList legend="Tags">
+        <CheckboxList legend="Tags" error={errors.tags}>
           {foodTags.map((tag) => (
             <Checkbox
               key={tag}

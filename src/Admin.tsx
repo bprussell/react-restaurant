@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { Food, foodTags } from "./food";
+import { Food, foodTags, NewFood } from "./food";
 import Button from "./shared/Button";
 import Checkbox from "./shared/Checkbox";
 import CheckboxList from "./shared/CheckboxList";
 import Heading from "./shared/Heading";
 import Input from "./shared/Input";
 
-const emptyFood: Food = {
+const emptyFood: NewFood = {
   name: "",
   image: "",
   price: 0,

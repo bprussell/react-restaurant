@@ -18,3 +18,15 @@ export async function addFood(food: NewFood): Promise<Food> {
   });
   return resp.json();
 }
+
+export async function deleteFood(id: number): Promise<void> {
+  await fetch(`${url}/${id}`, {
+    method: "DELETE",
+  });
+}
+
+export async function deleteFoodsByName(name: string): Promise<void> {
+  const foods = await getFoods();
+  const foodsToDelete = foods.filter((f) => f.name === name);
+  await Promise.all(foodsToDelete.map((f) => deleteFood(f.id)));
+}

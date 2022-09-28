@@ -73,11 +73,15 @@ export default function Admin() {
       top: 0,
       behavior: "smooth",
     });
+
+    if (status === "submitting") return;
+
     setStatus("submitting");
     if (!isValid) {
       setStatus("submitted");
       return;
     }
+
     await addFood(food);
     toast.success("Food added! 🍔");
     setStatus("idle");
@@ -158,7 +162,7 @@ export default function Admin() {
           ))}
         </CheckboxList>
         <Button className="block mt-4" type="submit" variant="primary">
-          Save
+          {status === "submitting" ? "Saving..." : "Save"}
         </Button>
       </form>
     </>

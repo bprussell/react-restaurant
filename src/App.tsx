@@ -2,6 +2,8 @@ import { Link, Route, Routes } from "react-router-dom";
 import Admin from "./Admin";
 import "./index.css";
 import Menu from "./Menu";
+import { ErrorBoundary } from "react-error-boundary";
+import ErrorFallback from "./shared/ErrorFallback";
 
 export default function App() {
   return (
@@ -21,9 +23,24 @@ export default function App() {
           </Link>
         ))}
       </nav>
+
       <Routes>
-        <Route path="/" element={<Menu />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route
+          path="/"
+          element={
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <Menu />
+            </ErrorBoundary>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <ErrorBoundary FallbackComponent={ErrorFallback}>
+              <Admin />
+            </ErrorBoundary>
+          }
+        />
       </Routes>
     </>
   );

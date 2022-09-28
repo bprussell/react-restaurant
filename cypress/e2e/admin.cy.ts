@@ -31,7 +31,8 @@ describe("Admin", () => {
     cy.findByLabelText("Dinner").check();
 
     // submit the form
-    cy.findByRole("button", { name: /save/i }).click();
+    cy.findByRole("button", { name: "Save" }).click();
+    cy.findByRole("button", { name: "Saving..." });
 
     // verify the food is displayed on the menu page
     cy.findByRole("link", { name: /home/i }).click();

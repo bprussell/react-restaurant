@@ -21,3 +21,10 @@ Primary.args = {
   children: "Click me",
   className: "custom-class",
 };
+
+export const Secondary = Template.bind({});
+Secondary.args = {
+  variant: "secondary",
+  children: "Click me",
+  className: "custom-class",
+};

@@ -1,9 +1,13 @@
 import Button from "./Button";
 import { render, screen } from "@testing-library/react";
+import { composeStories } from "@storybook/testing-react";
+import * as stories from "./Button.stories";
+
+const { Primary } = composeStories(stories);
 
 describe("Button", () => {
   it("should render children", () => {
-    render(<Button type="button">Click me</Button>);
+    render(<Primary />);
     expect(screen.getByRole("button", { name: "Click me" }));
   });
 

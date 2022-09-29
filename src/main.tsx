@@ -5,17 +5,16 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { ErrorBoundary } from "react-error-boundary";
 
-if (import.meta.env.VITE_ENABLE_MSW === "Y") {
-  const { worker } = await import("./mocks/browser");
-  worker.start();
-}
+const DevTools = React.lazy(() => import("./mocks/DevTools"));
+
+const useDevTools = import.meta.env.VITE_ENABLE_DEVTOOLS === "Y";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <ErrorBoundary fallback={<h1>Oops! Sorry, an error occurred.</h1>}>
       <BrowserRouter>
         <Toaster />
-        <App />
+        {useDevTools ? <DevTools /> : <App />}
       </BrowserRouter>
     </ErrorBoundary>
   </React.StrictMode>

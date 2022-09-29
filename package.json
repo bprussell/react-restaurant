@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "dev:msw": "cross-env VITE_ENABLE_MSW=Y vite",
+    "dev:msw": "cross-env VITE_ENABLE_DEVTOOLS=Y vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
     "start-api": "json-server --watch db.json --port 3001 --delay 1000",

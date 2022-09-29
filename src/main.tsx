@@ -4,9 +4,9 @@ import { Toaster } from "react-hot-toast";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { ErrorBoundary } from "react-error-boundary";
-import { worker } from "./mocks/browser";
 
 if (process.env.NODE_ENV === "development") {
+  const { worker } = await import("./mocks/browser");
   worker.start();
 }
 

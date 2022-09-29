@@ -5,7 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import { ErrorBoundary } from "react-error-boundary";
 
-if (process.env.NODE_ENV === "development") {
+if (import.meta.env.VITE_ENABLE_MSW === "Y") {
   const { worker } = await import("./mocks/browser");
   worker.start();
 }

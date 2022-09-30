@@ -7,6 +7,7 @@ import Checkbox from "./shared/Checkbox";
 import CheckboxList from "./shared/CheckboxList";
 import Heading from "./shared/Heading";
 import Input from "./shared/Input";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const emptyFood: NewFood = {
   name: "",
@@ -38,6 +39,22 @@ export default function Admin() {
   const [food, setFood] = useState(emptyFood);
   const [touched, setTouched] = useState<Touched>({});
   const [status, setStatus] = useState<FormStatus>("idle");
+
+  const queryClient = useQueryClient();
+
+  const foodMutation = useMutation(addFood, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["foods"]);
+      toast.success("Food added! 🍔");
+      setStatus("idle");
+      setFood(emptyFood);
+      setTouched({});
+    },
+    onError: () => {
+      toast.error("Failed to add food 😢");
+      setStatus("error");
+    },
+  });
 
   const errors = validate();
   const isValid = Object.keys(errors).length === 0;
@@ -82,11 +99,7 @@ export default function Admin() {
       return;
     }
 
-    await addFood(food);
-    toast.success("Food added! 🍔");
-    setStatus("idle");
-    setFood(emptyFood);
-    setTouched({});
+    foodMutation.mutate(food);
   };
 
   const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {

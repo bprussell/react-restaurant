@@ -1,23 +1,17 @@
-import { useEffect, useState } from "react";
-import { Food } from "./food";
+import { useQuery } from "@tanstack/react-query";
 import { getFoods } from "./services/foodsApi";
 import Heading from "./shared/Heading";
 export default function Menu() {
-  const [foods, setFoods] = useState<Food[]>([]);
+  const foodQuery = useQuery(["foods"], getFoods);
 
-  useEffect(() => {
-    async function fetchFoods() {
-      const data = await getFoods();
-      setFoods(data);
-    }
-    fetchFoods();
-  }, []);
+  if (foodQuery.isLoading) return <p>Loading...</p>;
+  if (foodQuery.isError) throw foodQuery.error;
 
   return (
     <>
       <Heading level={2}>Menu</Heading>
       <div className="flex flex-wrap">
-        {foods.map((food) => {
+        {foodQuery.data.map((food) => {
           return (
             <div
               key={food.name}
@@ -34,6 +28,7 @@ export default function Menu() {
             </div>
           );
         })}
+        {foodQuery.isFetching ? <p>Updating...</p> : null}
       </div>
     </>
   );
